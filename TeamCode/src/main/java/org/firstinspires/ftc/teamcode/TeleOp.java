@@ -14,15 +14,13 @@ public class TeleOp extends LinearOpMode {
     DcMotorEx armMotor;
 
     Servo servo1, servo2;
-    //wegkowogkg
 
-    static final int armTickCount = 1440; // 360 as tick count = 90 degrees
-    static final double armQuarterTurn = armTickCount/4;
-    static final double armHalfTurn = armTickCount/2;
 
     public static final double COUNTS_PER_MOTOR_REV    = 1440 ;
     public static final double DRIVE_GEAR_REDUCTION    = 1.0 ;
     public static final double WHEEL_DIAMETER_INCHES   = 0.314961 ;
+
+    //
     public static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
     //19.7498748746487
 
@@ -30,8 +28,10 @@ public class TeleOp extends LinearOpMode {
     public void runOpMode() {
         leftDrive = hardwareMap.get(DcMotorEx.class, "leftDrive");
         rightDrive = hardwareMap.get(DcMotorEx.class, "rightDrive");
-
         armMotor = hardwareMap.get(DcMotorEx.class, "Arm");
+
+        // 'setZeroPowerBehavior': What the motor does when power = 0
+        // Code below basically resets armMotor
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -50,7 +50,7 @@ public class TeleOp extends LinearOpMode {
             rightDrive.setPower(-gamepad1.left_stick_y - gamepad1.right_stick_x);
 
             if(gamepad2.square) {
-                armMotor.setTargetPosition((int) (COUNTS_PER_INCH * 12));
+                armMotor.setTargetPosition((int) (COUNTS_PER_INCH));
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(1);
             }
