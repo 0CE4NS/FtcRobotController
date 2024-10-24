@@ -32,7 +32,7 @@ public class TeleOp extends LinearOpMode {
 
         // 'setZeroPowerBehavior': What the motor does when power = 0
         // Code below basically resets armMotor
-        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //ask
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setPower(0);
@@ -46,7 +46,7 @@ public class TeleOp extends LinearOpMode {
         waitForStart();
         while (!isStopRequested() && opModeIsActive()) {
 
-            leftDrive.setPower(-gamepad1.left_stick_y + gamepad1.right_stick_x);
+            leftDrive.setPower(-gamepad1.left_stick_y + gamepad1.right_stick_x); //ask - ?
             rightDrive.setPower(-gamepad1.left_stick_y - gamepad1.right_stick_x);
 
             if(gamepad2.square) {
